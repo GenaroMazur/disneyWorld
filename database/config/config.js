@@ -1,9 +1,9 @@
-{
+module.exports = {
   "development": {
     "username": "root",
     "password": null,
-    "database": "database_development",
-    "host": "127.0.0.1",
+    "database": "disneyWorld",
+    "host": "localhost:3066",
     "dialect": "mysql"
   },
   "test": {
@@ -14,10 +14,10 @@
     "dialect": "mysql"
   },
   "production": {
-    "username": "root",
-    "password": null,
-    "database": "database_production",
-    "host": "127.0.0.1",
+    "username": process.env.userDb,
+    "password": process.env.passDb,
+    "database": process.env.databaseName,
+    "host": process.env.hostDb,
     "dialect": "mysql"
   }
 }
