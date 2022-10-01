@@ -2,6 +2,12 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 
+if (!process.env.PORT){
+    require("dotenv").config()
+}
+
+app.use(cors())
+
 const methodOverride = require("method-override");
 app.use(methodOverride("_method"));
 
@@ -15,7 +21,7 @@ app.use(session({
 app.use(express.urlencoded({extended:false}));
 app.use(express.json());
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT;
 app.listen(PORT, ()=>{
     console.log("The Disney World is run in the port :" + PORT);
 });
@@ -24,5 +30,5 @@ const indexRoutes = require("./routes/index.routes")
 app.use("/", indexRoutes);
 
 app.use((req, res, next)=>{
-    res.status(404).json("URL not found (404 )");
+    res.status(404).json("URL not found ( 404 )");
 });
