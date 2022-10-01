@@ -1,0 +1,24 @@
+{
+  "name": "disneyworld",
+  "version": "1.0.0",
+  "description": "Project work of alkemy",
+  "main": "app.js",
+  "scripts": {
+    "test": "nodemon app.js",
+    "start": "node app.js",
+    "build": "sequelize init"
+  },
+  "keywords": [],
+  "author": "Genaro Mazur",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.1",
+    "mysql2": "^2.3.3",
+    "sequelize": "^6.23.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
+}
