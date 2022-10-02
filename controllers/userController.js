@@ -1,9 +1,15 @@
 const jwk = require("jsonwebtoken")
-
+const db = require("./../database/models")
 const userController = {
     "loginDefault" : (req, res)=>{
-
-        res.status(200).json("")
+        db.User.findAll()
+        .then(user=>{
+            res.status(200).json({user})
+        })
+        .catch(err=>{
+            res.status(500).json({msg:"error"})
+            console.error(err);
+        })
     },
     
     "registerDefault" : (req, res)=>{
@@ -12,24 +18,55 @@ const userController = {
     },
     
     "loginPost" : (req, res)=>{
-        
-        res.status(200).json("")
+
+        let email = req.body.email
+        let password = req.body.password
+
+        if (email && password){
+            db.User.findOne({where:{
+                "email":email
+            }})
+            .then(user=>{
+                res.status(200).json({msg: user})
+            })
+            .catch(err=>{
+                console.error(err);
+                
+                let msg = err.errors.map((err, i)=>{
+                    return {i : err.message}
+                })
+
+                res.status(500).json({msg})
+            })
+        } else {
+            res.status(412).json({msg:"complete the login form"})
+        }
+
     },
     
     "registerPost" : (req, res)=>{
-        let user;
-        if (req.body && req.body.name && req.body.password) {
-            let username = req.body.name;
-            let password = req.body.password;
-            user = {
-                username,
-                password,
-            }
+        let email = req.body.email
+        let password = req.body.password
+
+        if (email && password){
+            
+            let user = {email, password}
+
+            db.User.create(user)
+            .then(()=>{
+                res.status(200).json({msg:"User Created"})
+            })
+            .catch(err=>{
+                console.error(err);
+                let msg = err.errors.map(err=>{
+                    return err.message
+                })
+                res.status(412).json({msg})
+            })
+
+        } else {
+            res.status(412).json({msg:"Please, complete the email and password inputs"})
         }
-        jwk.sign({user}, "disneyWorld", (err, token)=>{
-            user.key = token;
-            res.status(200).json({token})
-        })
     }
 }
 

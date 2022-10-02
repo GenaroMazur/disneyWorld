@@ -29,6 +29,7 @@ CREATE TABLE `disney_world`.`genres` (
   `password` VARCHAR(15) NOT NULL,
   `create_at` DATE NULL,
   `delete_at` DATE NULL,
+  `update_at` DATE NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `key_UNIQUE` (`key` ),
   UNIQUE INDEX `email_UNIQUE` (`email` ) );

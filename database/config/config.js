@@ -1,9 +1,9 @@
 module.exports = {
   "development": {
     "username": "root",
-    "password": null,
+    "password": "",
     "database": "disney_world",
-    "host": "localhost:3306",
+    "host": "localhost",
     "dialect": "mysql"
   },
   "test": {
