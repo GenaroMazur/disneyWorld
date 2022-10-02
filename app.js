@@ -23,7 +23,7 @@ app.use(express.json());
 
 const PORT = process.env.PORT;
 app.listen(PORT, ()=>{
-    console.log("The Disney World is run in the port :" + PORT);
+    console.log("The Disney World runing in the port :" + PORT);
 });
 
 const indexRoutes = require("./routes/index.routes")

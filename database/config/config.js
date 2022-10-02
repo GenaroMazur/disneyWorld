@@ -2,8 +2,8 @@ module.exports = {
   "development": {
     "username": "root",
     "password": null,
-    "database": "disneyWorld",
-    "host": "localhost:3066",
+    "database": "disney_world",
+    "host": "localhost:3306",
     "dialect": "mysql"
   },
   "test": {
