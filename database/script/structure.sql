@@ -30,8 +30,8 @@ CREATE TABLE `disney_world`.`genres` (
   `create_at` DATE NULL,
   `delete_at` DATE NULL,
   `update_at` DATE NULL,
+  `verify` INT(1) DEFAULT 0,
   PRIMARY KEY (`id`),
-  UNIQUE INDEX `key_UNIQUE` (`key` ),
   UNIQUE INDEX `email_UNIQUE` (`email` ) );
   
   CREATE TABLE `disney_world`.`movies_charapters` (
