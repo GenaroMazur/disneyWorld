@@ -25,5 +25,19 @@ module.exports = function ( sequelize, DataTypes) {
 
     const Movie = sequelize.define(name, cols, config)
 
+    Movie.assocciation = function ( models ) {
+        Movie.belonsToMany(models.Character, {
+            "as":"characterMovie",
+            "foreingKey":"idMovie",
+            "otherKey":"idCharacter",
+            "through":"movies_character"
+        })
+        Movie.belonsToMany(models.Genre, {
+            "as":"genreMovie",
+            "foreingKey":"idMovie",
+            "otherKey":"idGenre",
+            "through":"movies_genres"
+        })
+    }
     return Movie
 }
