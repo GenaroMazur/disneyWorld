@@ -1,14 +1,20 @@
 module.exports = function ( sequelize, DataTypes) {
     let name = "Movie";
     let cols = {
-        "email": {
-            "type": DataTypes.STRING(60),
-            "allowNull" : false,
-            "unique" : true
+        "tittle": {
+            "type": DataTypes.STRING(45),
+            "allowNull" : false
         },
-        "password": {
-            "type": DataTypes.STRING(15),
+        "dateCreation": {
+            "type": DataTypes.DATE,
             "allowNull": false
+        },
+        "calification": {
+            "type": DataTypes.INTEGER,
+            "defaultValue":0
+        },
+        "image": {
+            "type": DataTypes.STRING(60)
         }
     }
     let config = {
