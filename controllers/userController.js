@@ -1,45 +1,46 @@
 const jwk = require("jsonwebtoken")
 const db = require("./../database/models")
+const session = require ("express-session")
 const userController = {
     "loginDefault" : (req, res)=>{
-        db.User.findAll()
-        .then(user=>{
-            res.status(200).json({user})
-        })
-        .catch(err=>{
-            res.status(500).json({msg:"error"})
-            console.error(err);
-        })
+        
     },
     
     "registerDefault" : (req, res)=>{
-
-        res.status(200).json("")
+        
+        jwk.sign(mensaje,"disneyWorld",(err,token)=>{
+            res.status(200).json(token)
+        })
     },
     
     "loginPost" : (req, res)=>{
+        if (req.body && req.body.token) {
+            jwk.verify(req.body.token, "disneyWorld", (err, key)=>{
 
-        let email = req.body.email
-        let password = req.body.password
+                if ( key && key.email && key.password ){
 
-        if (email && password){
-            db.User.findOne({where:{
-                "email":email
-            }})
-            .then(user=>{
-                res.status(200).json({msg: user})
+                    db.User.findOne({
+                        where:{email:key.email, password:key.password},
+                        attributes:["id","email"]
+                    })
+                    .then(user=>{
+                        
+                        res.status(200).json(user)
+                    })
+                    .catch(err=>{
+                        res.status(500).json({msg:"server error"})
+                        console.error(err);
+                    })
+
+                } else {
+                    res.status(412).json({"msg":"invalid token"})
+                }
+
             })
-            .catch(err=>{
-                console.error(err);
-                
-                let msg = err.errors.map((err, i)=>{
-                    return {i : err.message}
-                })
-
-                res.status(500).json({msg})
-            })
+            
         } else {
-            res.status(412).json({msg:"complete the login form"})
+
+            res.status(412).json({msg:"invalid token"})
         }
 
     },
@@ -54,12 +55,14 @@ const userController = {
 
             db.User.create(user)
             .then(()=>{
-                res.status(200).json({msg:"User Created"})
+                jwk.sign(user,"disneyWorld",(err,token)=>{
+                    res.status(200).json({token})
+                })
             })
             .catch(err=>{
                 console.error(err);
                 let msg = err.errors.map(err=>{
-                    return err.message
+                    return err
                 })
                 res.status(412).json({msg})
             })
