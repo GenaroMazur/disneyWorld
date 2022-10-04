@@ -26,7 +26,7 @@ CREATE TABLE `disney_world`.`genres` (
   CREATE TABLE `disney_world`.`users` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `email` VARCHAR(60) NOT NULL,
-  `password` VARCHAR(15) NOT NULL,
+  `password` VARCHAR(60) NOT NULL,
   `create_at` DATE NULL,
   `delete_at` DATE NULL,
   `update_at` DATE NULL,

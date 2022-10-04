@@ -7,7 +7,7 @@ module.exports = function ( sequelize, DataTypes) {
             "unique" : true
         },
         "password": {
-            "type": DataTypes.STRING(15),
+            "type": DataTypes.STRING(60),
             "allowNull": false
         },
         "verify": {
