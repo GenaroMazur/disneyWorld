@@ -1,5 +1,5 @@
 module.exports = function ( sequelize, DataTypes) {
-    let name = "character";
+    let name = "Character";
     let cols = {
         "name": {
             "type": DataTypes.STRING(45),
@@ -27,8 +27,8 @@ module.exports = function ( sequelize, DataTypes) {
 
     const Character = sequelize.define(name, cols, config)
 
-    Character.assocciation = function ( models ) {
-        Character.belonsToMany(models.Movie, {
+    Character.assocciate = function ( models ) {
+        Character.belongsToMany(models.Movie, {
             "as":"characterMovie",
             "foreingKey":"idCharacter",
             "otherKey":"idMovie",
