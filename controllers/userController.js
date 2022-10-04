@@ -1,47 +1,29 @@
 const jwk = require("jsonwebtoken")
 const db = require("./../database/models")
-const session = require ("express-session")
+const bcript = require("bcrypt")
+
 const userController = {
     "loginDefault" : (req, res)=>{
-        
+        res.status(200).json({msg:"please, complete the fildes : email, password"})
     },
     
     "registerDefault" : (req, res)=>{
         
-        jwk.sign(mensaje,"disneyWorld",(err,token)=>{
-            res.status(200).json(token)
-        })
+        res.status(200).json({msg:"please, complete the fildes : email, password"})
     },
     
     "loginPost" : (req, res)=>{
-        if (req.body && req.body.token) {
-            jwk.verify(req.body.token, "disneyWorld", (err, key)=>{
 
-                if ( key && key.email && key.password ){
-
-                    db.User.findOne({
-                        where:{email:key.email, password:key.password},
-                        attributes:["id","email"]
-                    })
-                    .then(user=>{
-                        
-                        res.status(200).json(user)
-                    })
-                    .catch(err=>{
-                        res.status(500).json({msg:"server error"})
-                        console.error(err);
-                    })
-
-                } else {
-                    res.status(412).json({"msg":"invalid token"})
-                }
-
-            })
-            
-        } else {
-
-            res.status(412).json({msg:"invalid token"})
-        }
+        let email= req.body.email;
+        
+        db.User.findOne({where:{email},attributes:["id"]})
+        .then(user=> user.dataValues)
+        .then(user=>{
+            //token expira en un dia
+            jwk.sign( user,process.env.SECRET,{expiresIn:"1 day"},(err, token)=>{
+                res.status(200).json({token})
+            } )
+        })
 
     },
     
@@ -49,15 +31,13 @@ const userController = {
         let email = req.body.email
         let password = req.body.password
 
-        if (email && password){
-            
+
             let user = {email, password}
+            user.password = bcript.hashSync(user.password, 10)
 
             db.User.create(user)
             .then(()=>{
-                jwk.sign(user,"disneyWorld",(err,token)=>{
-                    res.status(200).json({token})
-                })
+                res.status(201).json({msg:"user created usefull"})
             })
             .catch(err=>{
                 console.error(err);
@@ -67,9 +47,7 @@ const userController = {
                 res.status(412).json({msg})
             })
 
-        } else {
-            res.status(412).json({msg:"Please, complete the email and password inputs"})
-        }
+        
     }
 }
 

@@ -11,13 +11,6 @@ app.use(cors())
 const methodOverride = require("method-override");
 app.use(methodOverride("_method"));
 
-const session = require("express-session");
-app.use(session({
-    secret:"ariel",
-    resave: false,
-    saveUninitialized: false
-}));
-
 app.use(express.urlencoded({extended:false}));
 app.use(express.json());
 
