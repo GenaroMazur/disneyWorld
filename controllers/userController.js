@@ -4,12 +4,12 @@ const bcript = require("bcrypt")
 
 const userController = {
     "loginDefault" : (req, res)=>{
-        res.status(200).json({msg:"please, complete the fildes : email, password"})
+        res.status(200).json({msg:"In post method"})
     },
     
     "registerDefault" : (req, res)=>{
         
-        res.status(200).json({msg:"please, complete the fildes : email, password"})
+        res.status(200).json({msg:"In post method"})
     },
     
     "loginPost" : (req, res)=>{
@@ -46,8 +46,6 @@ const userController = {
                 })
                 res.status(412).json({msg})
             })
-
-        
     }
 }
 

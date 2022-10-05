@@ -26,12 +26,12 @@ module.exports = function ( sequelize, DataTypes) {
 
     const Character = sequelize.define(name, cols, config)
 
-    Character.assocciate = function ( models ) {
+    Character.associate = function ( models ) {
         Character.belongsToMany(models.Movie, {
-            "as":"MovieCharacter",
+            "through":"movies_characters",
             "foreingKey":"characterId",
             "otherKey":"movieId",
-            "through":"movies_characters",
+            "as":"MovieCharacter",
             timestamps:false
         })
     }

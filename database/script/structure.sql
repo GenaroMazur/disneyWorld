@@ -43,14 +43,10 @@ CREATE TABLE `disney_world`.`genres` (
   INDEX `fk_characterId_idx` (`characterId` ) ,
   CONSTRAINT `fk_movies_characters_movieId`
     FOREIGN KEY (`movieId`)
-    REFERENCES `disney_world`.`movies` (`id`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE,
+    REFERENCES `disney_world`.`movies` (`id`),
   CONSTRAINT `fk_movies_characters_characterId`
     FOREIGN KEY (`characterId`)
-    REFERENCES `disney_world`.`characters` (`id`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE);
+    REFERENCES `disney_world`.`characters` (`id`));
     
     CREATE TABLE `disney_world`.`movies_genres` (
   `id` INT NOT NULL AUTO_INCREMENT,
