@@ -16,9 +16,6 @@ module.exports= function(req, res, next){
         if (bcript.compareSync(password, user.password)){
             next()
         } else {
-            console.log(password);
-            console.log(user.password)
-            console.log(bcript.compareSync(password, user.password));
             res.status(402).json({msg:"Invalid email or password"})
         }
     })
