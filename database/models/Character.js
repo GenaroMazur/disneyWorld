@@ -21,18 +21,18 @@ module.exports = function ( sequelize, DataTypes) {
     }
     let config = {
         "tableName":"characters",
-        "createdAt":"create_at",
-        "updatedAt":"update_at"
+        "timestamps":false
     }
 
     const Character = sequelize.define(name, cols, config)
 
     Character.assocciate = function ( models ) {
         Character.belongsToMany(models.Movie, {
-            "as":"characterMovie",
-            "foreingKey":"idCharacter",
-            "otherKey":"idMovie",
-            "through":"movies_character"
+            "as":"MovieCharacter",
+            "foreingKey":"characterId",
+            "otherKey":"movieId",
+            "through":"movies_characters",
+            timestamps:false
         })
     }
 

@@ -11,18 +11,18 @@ module.exports = function ( sequelize, DataTypes) {
     }
     let config = {
         "tableName":"genres",
-        "createdAt":"create_at",
-        "updatedAt":"update_at"
+        "timestamps":false
     }
 
     const Genre = sequelize.define(name, cols, config)
     
     Genre.associate = function ( models ) {
         Genre.belongsToMany(models.Movie, {
-            "as":"genreMovie",
-            "foreingKey":"idGenre",
-            "otherKey":"idMovie",
-            "through":"movies_Genres"
+            "as":"GenreMovie",
+            "foreingKey":"genreId",
+            "otherKey":"movieId",
+            "through":"movies_genres",
+            "timestamps":false
         })
     }
     return Genre

@@ -19,24 +19,25 @@ module.exports = function ( sequelize, DataTypes) {
     }
     let config = {
         "tableName":"movies",
-        "createdAt":"create_at",
-        "updatedAt":"update_at"
+        timestamps:false
     }
 
     const Movie = sequelize.define(name, cols, config)
 
     Movie.associate = function ( models ) {
         Movie.belongsToMany(models.Character, {
-            "through":"movies_character",
-            "foreingKey":"idMovie",
-            "otherKey":"idCharacter",
-            "as":"characterMovie"
+            "through":"movies_characters",
+            "foreingKey":"movieId",
+            "otherKey":"characterId",
+            "as":"MovieCharacter",
+            timestamps:false
         })
         Movie.belongsToMany(models.Genre, {
             "through":"movies_genres",
-            "foreingKey":"idMovie",
-            "otherKey":"idGenre",
-            "as":"genreMovie"
+            "foreingKey":"movieId",
+            "otherKey":"genreId",
+            "as":"MovieGenre",
+            timestamps:false
         })
     }
     return Movie
