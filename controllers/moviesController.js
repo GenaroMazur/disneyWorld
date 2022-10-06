@@ -1,5 +1,4 @@
 const  sequelize = require("sequelize")
-const db = require("./../database/models")
 const Movie = require("./../database/models").Movie
 const moviesController = {
 
