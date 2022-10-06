@@ -4,7 +4,7 @@ const moviesController = require("./../controllers/moviesController")
 
 routes.get ("/",moviesController.allMovies)
 routes.get ("/:id",moviesController.movieDetail)
-routes.post("/:id",moviesController.addMovie)
+routes.post("/",moviesController.addMovie)
 routes.put("/:id",moviesController.updateMovie)
 routes.delete("/:id",moviesController.removeMovie)
 
