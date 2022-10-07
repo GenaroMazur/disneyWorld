@@ -1,5 +1,6 @@
 const  sequelize = require("sequelize")
 const Movie = require("./../database/models").Movie
+const db = require("./../database/models")
 const moviesController = {
 
     allMovies:(req, res)=>{
@@ -71,8 +72,35 @@ const moviesController = {
             res.status(500).json({msg:"some error"})
         })
     },
-    updateMovie:(req, res)=>{
-        let movie = {
+    updateMovie:async (req, res)=>{
+        let charactersInDb = []
+        try {
+            if (req.body.characters){
+                let characters = req.body.characters.split(",")
+                console.log(characters);
+                for (let i = 0; i<characters.length; i++){
+                    await db.Character.findOne({where:{name:characters[i]}})
+                    .then(character=>{
+                        if(character!=null){
+                            charactersInDb.push(character.dataValues)
+                        }
+                    })
+                }
+
+                for (let i = 0; i<charactersInDb.length; i++){
+                    let relation = {
+                        movieId:Number(req.params.id),
+                        characterId:charactersInDb[i].id
+                    }
+                    await db.MovieCharacter.create(relation)
+                }
+            }
+        } catch (error) {
+            console.error(error);
+        } finally {
+
+            
+            let movie = {
             tittle:req.body.tittle,
             calification:req.body.califiaction,
             dateCreation:req.body.dateCreation,
@@ -86,6 +114,7 @@ const moviesController = {
             console.error(err);
             res.status(500).json({msg:"some error"})
         })
+    }
     }
 }
 module.exports = moviesController

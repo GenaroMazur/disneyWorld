@@ -43,7 +43,7 @@ const characttersController = {
         let character = {
             name: req.body.name,
             age: req.body.age,
-            weigth: req.body.weigt,
+            weigth: req.body.weigth,
             history: req.body.history,
             image: req.body.image
         }
@@ -63,12 +63,14 @@ const characttersController = {
         try {
             if (req.body.movies) {
 
-                let movies = JSON.parse(req.body.movies)
+                let movies = req.body.movies.split(",")
                 for (let i = 0; i < movies.length; i++) {
 
-                    await db.Movie.findOne({ where: { tittle: movies[i].tittle } })
+                    await db.Movie.findOne({ where: { tittle: movies[i]} })
                         .then(movie => {
-                            moviesInDb.push(movie.dataValues)
+                            if (movie!=null){
+                                moviesInDb.push(movie.dataValues)
+                            }
                         })
 
                 }
@@ -88,7 +90,7 @@ const characttersController = {
             let character = {
                 name: req.body.name,
                 age: req.body.age,
-                weigth: req.body.weigt,
+                weigth: req.body.weigth,
                 history: req.body.history,
                 image: req.body.image
             }
