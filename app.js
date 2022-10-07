@@ -1,15 +1,12 @@
 const express = require("express");
 const app = express();
-const cors = require("cors");
 
 if (!process.env.PORT){
     require("dotenv").config()
 }
 
+const cors = require("cors");
 app.use(cors())
-
-const methodOverride = require("method-override");
-app.use(methodOverride("_method"));
 
 app.use(express.urlencoded({extended:false}));
 app.use(express.json());
