@@ -45,13 +45,47 @@ const moviesController = {
         })
     },
     addMovie:(req, res)=>{
-
+        let movie = {
+            tittle:req.body.tittle,
+            dateCreation:req.body.dateCreation,
+            calification:req.body.calificaton,
+            image:req.body.image
+        } 
+        Movie.create(movie)
+        .then(()=>{
+            res.status(201).json({msg:"Movie created !"})
+        })
+        .catch(err=>{
+            console.error(err);
+            res.status(500).json({msg:"some error"})
+        })
     },
     removeMovie:(req, res)=>{
-
+        let id = req.params.id
+        Movie.destroy({where:{id}})
+        .then(()=>{
+            res.status(200).json({msg:"Movie removed"})
+        })
+        .catch(err=>{
+            console.error(err);
+            res.status(500).json({msg:"some error"})
+        })
     },
     updateMovie:(req, res)=>{
-        
+        let movie = {
+            tittle:req.body.tittle,
+            calification:req.body.califiaction,
+            dateCreation:req.body.dateCreation,
+            image:req.body.image
+        }
+        Movie.update(movie,{where:{id:req.params.id}})
+        .then(()=>{
+            res.status(200).json({msg:"movie edited !"})
+        })
+        .catch(err=>{
+            console.error(err);
+            res.status(500).json({msg:"some error"})
+        })
     }
 }
 module.exports = moviesController

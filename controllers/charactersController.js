@@ -37,17 +37,51 @@ Character.findOne({
 },
 
 addCharacter:(req,res)=>{
-
-
+    let character = {
+        name : req.body.name,
+        age: req.body.age,
+        weigth: req.body.weigt,
+        history: req.body.history,
+        image: req.body.image
+    }
+    Character.create(character)
+    .then(()=>{
+        res.status(201).json({msg:"character created !"})
+    })
+    .catch(err=>{
+        console.error(err);
+        res.status(500).json({msg:"some error"})
+    })
 },
 
 updateCharacter:(req,res)=>{
-
+    let character = {
+        name : req.body.name,
+        age: req.body.age,
+        weigth: req.body.weigt,
+        history: req.body.history,
+        image: req.body.image
+    }
+    Character.update(character,{where:{id:req.params.id}})
+    .then(()=>{
+        res.status(200).json({msg:"character edited !"})
+    })
+    .catch(err=>{
+        console.error(err);
+        res.status(500).json({msg:"some error"})
+    })
 
 },
 
 deleteCharacter:(req,res)=>{
-
+    Character.destroy({where:{id:req.params.id}})
+    .then(()=>{
+        res.status(200).json({msg:"character deleted !"})
+    })
+    .catch(err=>{
+        console.error(err);
+        res.status(500).json({msg:"some error"})
+    })
 
 }
 }
