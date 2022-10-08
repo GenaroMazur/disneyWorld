@@ -30,7 +30,7 @@ CREATE TABLE `disney_world`.`genres` (
   `create_at` DATE NULL,
   `delete_at` DATE NULL,
   `update_at` DATE NULL,
-  `verify` INT(1) DEFAULT 0,
+  `status` VARCHAR(15) DEFAULT "guest",
   PRIMARY KEY (`id`),
   UNIQUE INDEX `email_UNIQUE` (`email` ) );
   
