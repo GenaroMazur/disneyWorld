@@ -1,20 +1,28 @@
-const { TIME } = require("sequelize")
+const { Op } = require("sequelize")
 const sequelize = require("sequelize")
 const Movie = require("./../database/models").Movie
 const db = require("./../database/models")
 const moviesController = {
 
     allMovies: (req, res) => {
-
+        let where={
+            tittle:{[Op.substring]:req.query.tittle?req.query.tittle:""}
+        };
+        let order =[
+            ["tittle",req.query.order.toLowerCase()=="desc"?req.query.order:"ASC"]
+        ]
         Movie.findAll({
+            where,
+            order,
             include: [
                 {
                     association: "MovieCharacter",
                     attributes: ["name", [sequelize.fn('concat', "http://localhost:", process.env.PORT, "/characters/", sequelize.col("CharacterId")), "detail"]]
                 },
                 {
-                    association: "MovieGenre",
-                    attributes: { exclude: ["id"] }
+                    association:"MovieGenre",
+                    attributes: { exclude: ["id"] },
+                    where:{name:{[Op.substring]:req.query.genres?req.query.genres:""}}
                 }],
 
             attributes: ["tittle", "image", "dateCreation",
