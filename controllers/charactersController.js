@@ -1,13 +1,19 @@
 const Character = require("./../database/models").Character
 const MovieCharacter = require("./../database/models").MovieCharacter
 const db = require("./../database/models")
+const {Op} = require("sequelize")
 const sequelize = require("sequelize")
 const characttersController = {
 
     allCharacters: (req, res) => {
-
+        let where = {
+            name:{[Op.substring]:req.query.name?req.query.name:""}
+        }
+        if(req.query.age){
+            where = {...where, ...{age: req.query.age}}
+        }
         Character.findAll({
-
+            where,
             attributes: ["name", "image", [sequelize.fn("concat", "http://localhost:", process.env.PORT, "/characters/",
                 sequelize.col("Character.id")), "detail"]]
 
