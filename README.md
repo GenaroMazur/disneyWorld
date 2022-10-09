@@ -8,7 +8,7 @@
  2. **Then, build the project** 
  `cd disneyWorld && npm run build`
  creeate a .env archive, that will have any variables:
- PORT=(number), SECRET=(password for jwk)
+ PORT=(number), SECRET=(password for jwk), SENDGRID=(api-key of sendgrid)
  3. **Import structure DB in your local DB**
 the structure and data are in disneyWorld/database/scripts/structure.sql
 and run the server in port 3306
