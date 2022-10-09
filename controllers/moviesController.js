@@ -9,7 +9,7 @@ const moviesController = {
             tittle:{[Op.substring]:req.query.tittle?req.query.tittle:""}
         };
         let order =[
-            ["tittle",req.query.order.toLowerCase()=="desc"?req.query.order:"ASC"]
+            ["tittle",req.query.order?.toLowerCase()=="desc"?req.query.order:"ASC"]
         ]
         Movie.findAll({
             where,

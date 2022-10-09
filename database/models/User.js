@@ -10,9 +10,9 @@ module.exports = function ( sequelize, DataTypes) {
             "type": DataTypes.STRING(60),
             "allowNull": false
         },
-        "verify": {
-            "type": DataTypes.BOOLEAN,
-            "defaultValue": 0
+        "status": {
+            "type": DataTypes.STRING(15),
+            "defaultValue": "guest"
         }
     }
     let config = {

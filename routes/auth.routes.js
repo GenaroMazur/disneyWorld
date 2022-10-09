@@ -11,5 +11,6 @@ routes.get("/register", userController.registerDefault);
 
 routes.post("/login",authUserMiddleware,userController.loginPost);
 routes.post("/register",registerValidatorMiddleware,registerAuthMiddleware, userController.registerPost);
+routes.post("/key/:token",userController.authentication)
 
 module.exports = routes;

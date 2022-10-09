@@ -1,9 +1,11 @@
 const express = require("express");
 const app = express();
+const sendgrid = require("@sendgrid/mail")
 
 if (!process.env.PORT){
     require("dotenv").config()
 }
+sendgrid.setApiKey(process.env.SENDGRID)
 
 const cors = require("cors");
 app.use(cors())
