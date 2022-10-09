@@ -17,7 +17,7 @@ const userController = {
 
         let email= req.body.email;
         
-        db.User.findOne({where:{email},attributes:["id"]})
+        db.User.findOne({where:{email},attributes:["id","status"]})
         .then(user=> user.dataValues)
         .then(user=>{
             //token expira en un dia

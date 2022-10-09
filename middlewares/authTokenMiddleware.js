@@ -3,7 +3,6 @@ const jwk = require("jsonwebtoken")
 module.exports= function(req, res, next){
     let authorization = req.header("authorization")
     let token;
-
     if (authorization && authorization.toLowerCase().startsWith("bearer")){
         token = authorization.split(" ")[1]
 

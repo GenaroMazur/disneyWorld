@@ -65,3 +65,7 @@ CREATE TABLE `disney_world`.`genres` (
     REFERENCES `disney_world`.`genres` (`id`)
     ON DELETE CASCADE
     ON UPDATE CASCADE);
+    
+INSERT INTO `disney_world`.`movies` (`tittle`, `dateCreation`, `calification`, `image`) VALUES ('Encanto', '2021-11-21', '3', 'encanto.jpg');
+INSERT INTO `disney_world`.`movies` (`tittle`, `dateCreation`, `calification`, `image`) VALUES ('Red', '2022-02-18', '4', 'red.jpg');
+INSERT INTO `disney_world`.`movies` (`tittle`, `dateCreation`, `calification`, `image`) VALUES ('Pinocho', '2022-09-08', '2', 'pinocho.jpg');
