@@ -13,4 +13,7 @@ routes.use("/characters", charactersRoute);
 const moviesRoute = require("./movies.routes");
 routes.use("/movies", moviesRoute);
 
+const imagesRoutes = require("./images.routes")
+routes.use("/image", imagesRoutes)
+
 module.exports = routes;

@@ -22,10 +22,10 @@ const moviesController = {
                 {
                     association:"MovieGenre",
                     attributes: { exclude: ["id"] },
-                    where:{name:{[Op.substring]:req.query.genres?req.query.genres:""}}
+                    // where:{name:{[Op.substring]:req.query.genres?req.query.genres:""}}
                 }],
 
-            attributes: ["tittle", "image", "dateCreation",
+            attributes: ["tittle", [sequelize.fn("concat","http://localhost:",process.env.PORT,"/image/movies/",sequelize.col("Movie.image")),"image"], "dateCreation",
                 [sequelize.fn('concat', "http://localhost:", process.env.PORT, "/movies/", sequelize.col("Movie.id")), "detail"]]
         })
             .then(movies => {
