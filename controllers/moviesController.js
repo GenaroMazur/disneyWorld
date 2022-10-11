@@ -21,8 +21,9 @@ const moviesController = {
                 },
                 {
                     association:"MovieGenre",
+                    required:req.query.genres?true:false,
                     attributes: { exclude: ["id"] },
-                    // where:{name:{[Op.substring]:req.query.genres?req.query.genres:""}}
+                    where:{name:{[Op.substring]:req.query.genres?req.query.genres:""}}
                 }],
 
             attributes: ["tittle", [sequelize.fn("concat","http://localhost:",process.env.PORT,"/image/movies/",sequelize.col("Movie.image")),"image"], "dateCreation",

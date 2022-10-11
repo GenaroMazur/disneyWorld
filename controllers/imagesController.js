@@ -6,8 +6,6 @@ module.exports = {
             return res.status(400).json({msg:"invalid image"})
         }
         let direction = path.join(__dirname,"./../img/movies",req.params.img)
-        console.log(direction);
-        console.log(fs.existsSync(direction));
         if (fs.existsSync(direction)){
             res.status(200).sendFile(direction)
         } else {
@@ -19,8 +17,6 @@ module.exports = {
             return res.status(400).json({msg:"invalid image"})
         }
         let direction = path.join(__dirname,"./../img/characters",req.params.img)
-        console.log(direction);
-        console.log(fs.existsSync(direction));
         if (fs.existsSync(direction)){
             res.status(200).sendFile(direction)
         } else {
