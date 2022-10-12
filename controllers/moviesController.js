@@ -46,7 +46,8 @@ const moviesController = {
                     association: "MovieGenre",
                     attributes: ["name", "image"]
                 }
-            ]
+            ],
+            attributes:["tittle","dateCreation",[sequelize.fn("concat","http://localhost:",process.env.PORT,"/image/movies/",sequelize.col("Movie.image")),"image"],"calification"]
         })
             .then(movie => {
                 res.status(200).json(movie)
