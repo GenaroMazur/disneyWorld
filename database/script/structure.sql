@@ -69,3 +69,7 @@ CREATE TABLE `disney_world`.`genres` (
 INSERT INTO `disney_world`.`movies` (`tittle`, `dateCreation`, `calification`, `image`) VALUES ('Encanto', '2021-11-21', '3', 'encanto.jpg');
 INSERT INTO `disney_world`.`movies` (`tittle`, `dateCreation`, `calification`, `image`) VALUES ('Red', '2022-02-18', '4', 'red.jpg');
 INSERT INTO `disney_world`.`movies` (`tittle`, `dateCreation`, `calification`, `image`) VALUES ('Pinocho', '2022-09-08', '2', 'pinocho.jpg');
+INSERT INTO `disney_world`.`movies` (`tittle`, `dateCreation`, `calification`, `image`) VALUES ('mulan 1998', '1998-09-08', '3', 'mulan1998.jpg');
+INSERT INTO `disney_world`.`movies` (`tittle`, `dateCreation`, `calification`, `image`) VALUES ('sirenita 1989', '1989-09-04', '5', 'sirenita1989.jpg');
+INSERT INTO `disney_world`.`movies` (`tittle`, `dateCreation`, `calification`, `image`) VALUES ('enredados', '2010-11-14', '2', 'enredados.jpg');
+INSERT INTO `disney_world`.`movies` (`tittle`, `dateCreation`, `calification`, `image`) VALUES ('blanca nieves', '1937-12-21', '4', 'blancanieves.jpg');
