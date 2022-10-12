@@ -17,6 +17,7 @@ const moviesController = {
             include: [
                 {
                     association: "MovieCharacter",
+                    required:false,
                     attributes: ["name", [sequelize.fn('concat', "http://localhost:", process.env.PORT, "/characters/", sequelize.col("CharacterId")), "detail"]]
                 },
                 {
