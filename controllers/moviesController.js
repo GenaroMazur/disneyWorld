@@ -31,7 +31,7 @@ const moviesController = {
                 [sequelize.fn('concat', "http://localhost:", process.env.PORT, "/movies/", sequelize.col("Movie.id")), "detail"]]
         })
             .then(movies => {
-                res.status(200).json({ movies })
+                res.status(200).json({ count:movies.length, movies })
             })
     },
 
@@ -61,8 +61,8 @@ const moviesController = {
         let movie = {
             tittle: req.body.tittle,
             dateCreation: req.body.dateCreation,
-            calification: req.body.calificaton,
-            image: req.body.image
+            calification: req.body.calification,
+            image: req.file?.filename || null
         }
         Movie.create(movie)
             .then(() => {
@@ -138,7 +138,7 @@ const moviesController = {
 
             let movie = {
                 tittle: req.body.tittle,
-                calification: req.body.califiaction,
+                calification: req.body.calification,
                 dateCreation: req.body.dateCreation,
                 image: req.body.image
             }

@@ -15,7 +15,8 @@ const characttersController = {
         Character.findAll({
             where,
             attributes: ["name", "image", [sequelize.fn("concat", "http://localhost:", process.env.PORT, "/characters/",
-                sequelize.col("Character.id")), "detail"]]
+                sequelize.col("Character.id")), "detail"],
+                [sequelize.fn('concat', "http://localhost:", process.env.PORT, "/image/characters/", sequelize.col("character.image")), "image"]]
 
         })
             .then(characters => {
@@ -34,7 +35,9 @@ const characttersController = {
                 association: "MovieCharacter",
                 attributes: ["tittle", "dateCreation", "calification", "image",
                     [sequelize.fn('concat', "http://localhost:", process.env.PORT, "/movies/", sequelize.col("movieid")), "detail"]]
-            }
+            },
+            attributes:["name","age","weigth","history",
+            [sequelize.fn('concat', "http://localhost:", process.env.PORT, "/image/characters/", sequelize.col("character.image")), "image"]]
         })
             .then(character => {
                 res.status(200).json(character)
@@ -51,7 +54,7 @@ const characttersController = {
             age: req.body.age,
             weigth: req.body.weigth,
             history: req.body.history,
-            image: req.body.image
+            image: req.file?.filename || null
         }
 
         Character.create(character)
@@ -98,7 +101,7 @@ const characttersController = {
                 age: req.body.age,
                 weigth: req.body.weigth,
                 history: req.body.history,
-                image: req.body.image
+                image: req.file?.filename
             }
             Character.update(character, {
                 where: {
